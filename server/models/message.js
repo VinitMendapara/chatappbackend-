@@ -7,7 +7,8 @@ const messageSchema = new mongoose.Schema(
             required: true,
         },
         from_user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-        to_user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
+        to_user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+        read_mark: {type: Boolean, default: false}
     },
     { timestamps: true }
 )

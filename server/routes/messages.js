@@ -9,6 +9,7 @@ router.get("/", async (req, res) => {
     if (!from_user || !to_user) {
       return res.status(406).send({status: "Data is Malformed"})
     }
+
     const messages = await Message.find({
       $and: [
         {from_user: [from_user, to_user]},

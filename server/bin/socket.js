@@ -27,6 +27,12 @@ const socketHandler = async (io, socket) => {
         io.to(room).emit("user_type_msg", username)
     })
 
+    // mark as read
+    socket.on("mark_read", async ({id, room}) => {
+        await Message.findOneAndUpdate({_id: id}, {read_mark: true})
+        io.to(room).emit("message_read", id)
+    })
+
     // on message receive, save it to database and then send
     socket.on("send", async ({chat_text, my_user_id, current_chat_user, room}) => {
         console.log(`sending ${chat_text} to >${room}<`)
